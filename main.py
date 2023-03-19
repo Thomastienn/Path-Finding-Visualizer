@@ -2,6 +2,7 @@ import os, time
 from colorama import init, Fore, Back, Style, ansi
 import numpy as np
 import random
+from Point import Point
 
 # value_maze = [
 #     [1, 1, 1, 1, 1, 1, 1, 1],
@@ -109,50 +110,6 @@ def generate_maze_valid_path_start_end(random=True) -> tuple:
     value_maze = np.random.randint(2, size=(7, 30)).tolist()
     init_maze()
     return generate_further_entry_end()    
-
-class Point:
-    def __init__(self, x, y, value, prev=None) -> None:
-        self.x = x
-        self.y = y
-        self.value = value
-        self.prev = prev
-        
-    def __add__(self, other):
-        if isinstance(other, tuple):
-            return (self.x + other[0], self.y + other[1])
-        if isinstance(other, Point):
-            return (self.x + other.x, self.y + other.y)
-        return None
-    
-    def __sub__(self, other):
-        if isinstance(other, tuple):
-            return (self.x - other[0], self.y - other[1])
-        if isinstance(other, Point):
-            return (self.x - other.x, self.y - other.y)
-        return None
-    
-    def __eq__(self, other):
-        if(other == None):
-            return False
-        if isinstance(other, tuple):
-            return (self.x == other[0]) and (self.y == other[1])
-        if isinstance(other, Point):
-            return (self.x == other.x) and (self.y == other.y)
-        return None
-    def __ne__(self, other):
-        if(other == None):
-            return True
-        if isinstance(other, tuple):
-            return (self.x != other[0]) or (self.y != other[1])
-        if isinstance(other, Point):
-            return (self.x != other.x) or (self.y != other.y)
-        return None
-
-    def __str__(self) -> str:
-        return f"({self.x}, {self.y})"
-    
-    def __repr__(self) -> str:
-        return f"({self.x}, {self.y})"
 
 def main(start_end):
     all_dir = [(0,1), (0,-1), (1,0), (-1,0)]
